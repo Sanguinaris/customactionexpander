@@ -27,8 +27,6 @@ func main() {
 
 	read, err := os.Open(os.Args[1])
 	check(err)
-	write, err := os.Create(os.Args[1] + ".cab")
-	check(err)
 
 	_, err = read.Seek(int64(overlaySection), 0)
 	check(err)
@@ -46,6 +44,9 @@ func main() {
 		return
 	}
 	fmt.Println("found cab!")
+
+	write, err := os.Create(os.Args[1] + ".cab")
+	check(err)
 	write.Write(p[:n])
 
 	// do the rest
